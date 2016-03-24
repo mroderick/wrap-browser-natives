@@ -1,12 +1,12 @@
-var config = module.exports;
+'use strict';
 
-config.browser = {
+exports.browser = {
     rootPath: '../',
 
     environment: 'browser',
 
     sources: [
-        'lib/**/*.js'
+        'lib/wrapple.umd.js'
     ],
 
     tests: [
@@ -17,8 +17,8 @@ config.browser = {
         require('buster-istanbul')
     ],
 
-    "buster-istanbul": {
-        outputDirectory: "coverage",
-        format: "lcov"
+    'buster-istanbul': {
+        outputDirectory: 'coverage',
+        format: 'lcov'
     }
 };
