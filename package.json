@@ -2,7 +2,8 @@
   "name": "wrapple",
   "version": "0.4.0",
   "description": "Wrapper for runtime natives to allow stubbing in unit tests.",
-  "main": "lib/wrapple.js",
+  "main": "lib/wrapple.umd.js",
+  "jsnext:main": "lib/wrapple.js",
   "directories": {
     "test": "test"
   },
@@ -10,13 +11,22 @@
   "devDependencies": {
     "buster": "0.7.18",
     "buster-istanbul": "0.1.13",
-    "jscs": "1.11.3",
-    "phantomjs": "1.9.15"
+    "eslint": "2.4.0",
+    "phantomjs": "1.9.15",
+    "rimraf": "2.5.2",
+    "rollup": "0.25.6"
   },
   "scripts": {
-    "lint": "jscs **/*.js",
-    "test": "./scripts/run-tests"
+    "lint": "npm run clean && eslint .",
+    "build": "rollup -f umd -n wrapple lib/wrapple.js -o lib/wrapple.umd.js",
+    "clean": "rimraf lib/wrapple.umd.js",
+    "test": "npm run build && ./scripts/run-tests && npm run clean",
+    "prepublish": "npm run build",
+    "postpublish": "npm run clean"
   },
+  "files": [
+    "lib"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/mroderick/wrapple.git"
